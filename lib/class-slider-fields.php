@@ -48,8 +48,9 @@ class Neat_slider_fields {
 				'repeatable_group' => new Fieldmanager_Group( array(
 					'limit'          => 0,
 					'starting_count' => 1,
-        			'extra_elements' => 0, 
-					'add_more_label' => 'Add another Slide', 
+        			'extra_elements' => 0,
+        			'sortable'       => true,
+					'add_more_label' => 'Add another layer', 
 					'label'          => 'New layer',
 					'label_macro' => array( 'layer: %s', 'title' ),
 					'tabbed'   => true, 
@@ -61,9 +62,9 @@ class Neat_slider_fields {
 							'label'          => 'Content',
 							'children'       => array(
 								'content-image'        => new Fieldmanager_Media( 'Image' ),
-								'content-text' => new Fieldmanager_RichTextArea( 'Text' ),
-								'content-html'     => new Fieldmanager_TextArea( 'HTML / Video / Audio' ), 
-								 
+								'content-text' => new Fieldmanager_RichTextArea( 'Text'
+								),
+								'content-html'     => new Fieldmanager_TextArea( 'HTML / Video / Audio', array( 'sanitize' => 'wp_kses_post' ) ), 
 							)
 						) ),
 						
@@ -82,11 +83,29 @@ class Neat_slider_fields {
 							'children'       => array(
 								'data-in'    => new Fieldmanager_Select( 'Data in', 
 									array( 'options' => array(
-										'fade', 'none' ,'left', 'topLeft', 'bottomLeft', 'right', 'topRight', 'bottomRight', 'top', 'bottom'
+										'fade'  => 'Fade', 
+										'none'  => 'None',
+										'left' => 'Right',
+										 'topLeft' => 'Top Right',
+										 'bottomLeft' => 'Bottom Right',
+										 'right' => 'Left',
+										 'topRight' => 'Top Left',
+										 'bottomRight' => 'Bottom Left',
+										 'top' => 'Top',
+										 'bottom' => 'Bottom' 
 										 ) ) ),
 								'data-out'   => new Fieldmanager_Select( 'Data Out', 
 									array( 'options' => array(
-										'fade', 'none' ,'left', 'topLeft', 'bottomLeft', 'right', 'topRight', 'bottomRight', 'top', 'bottom'
+										'fade'  => 'Fade', 
+										'none'  => 'None',
+										'left' => 'Left',
+										 'topLeft' => 'Top Left',
+										 'bottomLeft' => 'Bottom Left',
+										 'right' => 'Right',
+										 'topRight' => 'Top Right',
+										 'bottomRight' => 'Bottom Right',
+										 'top' => 'Top',
+										 'bottom' => 'Bottom' 
 										 ) ) ),
 								'delay'         => new Fieldmanager_Textfield( 'Delay - time in ms before the in transition starts (in the current step / see steps)' ), 
 								'easingin'       => new Fieldmanager_Select( 'Easing in', 
@@ -118,11 +137,52 @@ class Neat_slider_fields {
 			
 			)
 		) );
-		$fm->add_meta_box( 'Slides', 'neat-slider' );
-
+		$fm->add_meta_box( 'Slides', 'neat-slider' ); 
  
-  
+		$fm = new Fieldmanager_Group( array(
+			'name'     => 'slider_settings',
+			'tabbed'   => true,
+			'children' => array(
 
+				'Layout_group' => new Fieldmanager_Group( array(
+					'label' => 'Layout',
+					'children' => array(
+						'slider_width'         => new Fieldmanager_Textfield( 'Slider width' , array('default_value' => '1170') 
+						),
+						'slider_height'         => new Fieldmanager_Textfield( 'Slider height', array('default_value' => '550')  ),
+
+						'fullWidth'       => new Fieldmanager_Radios( 'Full-width', array( 'default_value' => 'true', 'options' => array( 'true', 'false', ) ) ),
+					)
+				) ),
+				'slides_transition_group' => new Fieldmanager_Group( array(
+					'label' => 'Slides Transition',
+					'children' => array(
+						'slides_transition'       => new Fieldmanager_Select( 'Select Dropdown', array( 'options' => array( 'fade', 'none', 'slideLeft', 'slideRight', 'slideTop', 'slideBottom', 'scrollLeft', 'scrollRight', 'scrollTop', 'scrollBottom') ) ),
+
+						'slide_tspeed'         => new Fieldmanager_Textfield( 'Slide Transition Speed', array('default_value' => '650')  ),
+						'slide_endani'       => new Fieldmanager_Radios( 'Slide End Animation - if set true, objects will transition out before next slide moves in  ', array( 'default_value' => 'true', 'options' => array( 'true', 'false' ) ) ),
+
+						'slide_timeout'         => new Fieldmanager_Textfield( 'Timeout before switching slides', array('default_value' => '6000') ),
+						'slide_speedIn'         => new Fieldmanager_Textfield( 'Slide transition in speed', array('default_value' => '2500')  ),
+						'slide_speedOut'         => new Fieldmanager_Textfield( 'Slide Transition out Speed', array('default_value' => '2600')  ), 
+
+					)
+				) ),
+				'slider_appearance_group' => new Fieldmanager_Group( array(
+					'label' => 'Appearance',
+					'children' => array( 
+						'slider_controls'       => new Fieldmanager_Radios( 'Controls', array( 'default_value' => 'false', 'options' => array( 'true', 'false' ) ) ),
+
+						'slider_pager'       => new Fieldmanager_Radios( 'Pager', array( 'default_value' => 'true', 'options' => array( 'true', 'false' ) ) ), 
+
+						'slider_pauseonhover'       => new Fieldmanager_Radios( 'Pause On Hover', array( 'default_value' => 'true', 'options' => array( 'true', 'false' ) ) ), 
+
+						'slider_autochange'       => new Fieldmanager_Radios( 'Auto Change - auto change slides', array( 'default_value' => 'true', 'options' => array( 'true', 'false' ) ) ), 
+					)
+				) ), 
+			)
+		) );
+		$fm->add_meta_box( 'Slider Settings', 'neat-slider' ); 
  
 	}
 }
