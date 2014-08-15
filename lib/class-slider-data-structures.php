@@ -191,6 +191,12 @@ function neat_slider( $atts ) {
 		$slider_pauseonhover = $slider_settings[0]['slider_appearance_group']['slider_pauseonhover'];
 		$slider_autochange = $slider_settings[0]['slider_appearance_group']['slider_autochange'];
 
+		 if ( $fullWidth == 'true' ) { 
+		 	$sliderstyle = "fullWidthslider";
+		 } else {
+		 	$sliderstyle = "boxedWidthslider";
+		 }
+		 
 	  $list = '<div class="slider-wrapper">'; 
 	  $list .= '<div class="neat-slider-'.$sliderid.' fr-slider" style="max-width:'. $slider_width .'px;">';
 	  $list .= '<div class="fs_loader"></div>'; 
@@ -199,7 +205,7 @@ function neat_slider( $atts ) {
  	  $slide_image = wp_get_attachment_url($value['slide'],'full');
 	  $list .= '<div class="slide">';
 
-	  $list .= '<img data-fixed class="slide-bg" src=" '. $slide_image .' " alt=" '. get_the_title($value['slide'],'full') .' "> '; 
+	  $list .= '<img data-fixed class="'.$sliderstyle.' slide-bg" src=" '. $slide_image .' " alt=" '. get_the_title($value['slide'],'full') .' "> '; 
 
 		foreach ($value['repeatable_group'] as $subkey => $subvalue) { 
  
@@ -279,11 +285,11 @@ function neat_slider( $atts ) {
 	  				var marginslidebg = (viewportWidth - colWidth) / divideval  ; 
 
 	  				if (viewportWidth > 1200) {
-	  					$(".slide-bg").css({"width": viewportWidth,"max-width": viewportWidth,"margin-left":"-"+marginslidebg+"px", });
+	  					$(".fullWidthslider").css({"width": viewportWidth,"max-width": viewportWidth,"margin-left":"-"+marginslidebg+"px", });
 	  					$(".slider-wrapper").css({"width": viewportWidth,"max-width": viewportWidth,"margin-left":"-"+marginslidebg+"px",});
 	  				} else
 	  				{
-	  					$(".slide-bg").css({"width": viewportWidth,"max-width": viewportWidth,"margin-left":"0px",});
+	  					$(".fullWidthslider").css({"width": viewportWidth,"max-width": viewportWidth,"margin-left":"0px",});
 	  					$(".slider-wrapper").css({"width": viewportWidth,"max-width": viewportWidth,"margin-left":"-"+marginslidebg+"px",});  
 	  				}
 	  			$(window).resize(function() {
@@ -293,11 +299,11 @@ function neat_slider( $atts ) {
 	  				var divideval = 2 ; 
 	  				var marginslidebg = (viewportWidth - colWidth) / divideval  ; 
 	  				if (viewportWidth > 1200) {
-	  					$(".slide-bg").css({"width": viewportWidth,"max-width": viewportWidth,"margin-left":"-"+marginslidebg+"px", });
+	  					$(".fullWidthslider").css({"width": viewportWidth,"max-width": viewportWidth,"margin-left":"-"+marginslidebg+"px", });
 	  					$(".slider-wrapper").css({"width": viewportWidth,"max-width": viewportWidth,"margin-left":"-"+marginslidebg+"px",});
 	  				} else
 	  				{
-	  					$(".slide-bg").css({"width": viewportWidth,"max-width": viewportWidth,"margin-left":"0px",});
+	  					$(".fullWidthslider").css({"width": viewportWidth,"max-width": viewportWidth,"margin-left":"0px",});
 	  					$(".slider-wrapper").css({"width": viewportWidth,"max-width": viewportWidth,"margin-left":"-"+marginslidebg+"px",});  
 	  				}
 	  			});

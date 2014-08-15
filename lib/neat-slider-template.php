@@ -30,6 +30,11 @@ if ( have_posts() ) :
 		$slider_pauseonhover = $slider_settings[0]['slider_appearance_group']['slider_pauseonhover'];
 		$slider_autochange = $slider_settings[0]['slider_appearance_group']['slider_autochange'];
    		
+   		 if ( $fullWidth == 'true' ) { 
+ 	 $sliderstyle = "fullWidthslider";
+ } else {
+ 	$sliderstyle = "boxedWidthslider";
+ }
    		?>
 
   		<div class="neat-slider-<?php echo $sliderid ?> fr-slider" style="max-width:<?php echo $slider_width ?>px;">
@@ -39,7 +44,7 @@ if ( have_posts() ) :
 
 		<div class="slide">
 
-			<img  data-fixed class="slide-bg" src="<?php print_r(wp_get_attachment_url($value['slide'],'full')); ?>" alt="<?php print_r(get_the_title($value['slide'],'full'));   ?>">
+			<img  data-fixed class="<?php echo $sliderstyle ?> slide-bg" src="<?php print_r(wp_get_attachment_url($value['slide'],'full')); ?>" alt="<?php print_r(get_the_title($value['slide'],'full'));   ?>">
 
 		<?php 
 		 
@@ -123,12 +128,12 @@ if ( $fullWidth == 'true' ) { ?>
 
   if (viewportWidth > 1200) {
 
-  $(".slide-bg").css({"width": viewportWidth,"max-width": viewportWidth,"margin-left":"-"+marginslidebg+"px", }); 
+  $(".fullWidthslider").css({"width": viewportWidth,"max-width": viewportWidth,"margin-left":"-"+marginslidebg+"px", }); 
    
   $(".slider-wrapper").css({"width": viewportWidth,"max-width": viewportWidth,"margin-left":"-"+marginslidebg+"px",});  
   } else
   {
-  $(".slide-bg").css({"width": viewportWidth,"max-width": viewportWidth,"margin-left":"0px",}); 
+  $(".fullWidthslider").css({"width": viewportWidth,"max-width": viewportWidth,"margin-left":"0px",}); 
    
   $(".slider-wrapper").css({"width": viewportWidth,"max-width": viewportWidth,"margin-left":"-"+marginslidebg+"px",});  
   }
